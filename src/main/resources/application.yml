@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: pruebalinktic
+  profiles:
+    active: dev
+
+server:
+  port: 8086
+
+logging:
+  level:
+    root: INFO
+    com.linktic.pruebalinktic: DEBUG
