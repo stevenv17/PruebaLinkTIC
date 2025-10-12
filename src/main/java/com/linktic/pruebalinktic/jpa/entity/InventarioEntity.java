@@ -16,6 +16,6 @@ public class InventarioEntity {
     @Column(name = "producto_id")
     private Integer productoId;
 
-    @Column(name = "cantida")
+    @Column(name = "cantidad")
     private Integer cantidad;
 }
