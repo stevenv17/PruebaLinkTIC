@@ -1,0 +1,1 @@
+package com.linktic.pruebalinktic.jpa.repository;

@@ -3,6 +3,14 @@ spring:
     name: pruebalinktic
   profiles:
     active: dev
+  datasource:
+    url: jdbc:sqlite:C:\Users\steve\Desktop\Development\sqlite_DBs\linktic.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.SQLiteDialect
+
 
 server:
   port: 8086
