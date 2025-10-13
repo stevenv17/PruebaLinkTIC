@@ -4,7 +4,9 @@ import com.linktic.pruebalinktic.dto.ProductoDtoIn;
 import com.linktic.pruebalinktic.dto.ProductoDtoOut;
 import com.linktic.pruebalinktic.exception.ElementoNoEncontradoException;
 import com.linktic.pruebalinktic.exception.ErrorGeneralException;
+import com.linktic.pruebalinktic.jpa.entity.InventarioEntity;
 import com.linktic.pruebalinktic.jpa.entity.ProductoEntity;
+import com.linktic.pruebalinktic.jpa.repository.InventarioRepository;
 import com.linktic.pruebalinktic.jpa.repository.ProductoRepository;
 import com.linktic.pruebalinktic.mapper.ProductoMapper;
 import com.linktic.pruebalinktic.service.IProductoService;
@@ -15,6 +17,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -27,6 +30,7 @@ import java.util.Optional;
 public class ProductoService implements IProductoService {
 
   private final ProductoRepository productoRepository;
+  private final InventarioRepository inventarioRepository;
   private final ProductoMapper productoMapper;
 
 
@@ -38,15 +42,25 @@ public class ProductoService implements IProductoService {
    * @throws ErrorGeneralException excepción si ocurre un error
    */
   @Override
+  @Transactional
   public ProductoDtoOut crearProducto(ProductoDtoIn productoDtoIn) throws ErrorGeneralException {
-    log.info("Creación de producto");
+    log.info("Creación de producto inicio");
     validarDatosEntrada(productoDtoIn);
     ProductoEntity productoEntity = new ProductoEntity();
     productoEntity.setNombre(productoDtoIn.getNombre());
     productoEntity.setPrecio(productoDtoIn.getPrecio());
     productoEntity.setDescripcion(productoDtoIn.getDescripcion());
 
-    return productoMapper.toDto(productoRepository.save(productoEntity));
+    ProductoEntity productoPersistido = productoRepository.save(productoEntity);
+
+    InventarioEntity inventarioEntity = new InventarioEntity();
+    inventarioEntity.setProductoId(productoPersistido.getId());
+    inventarioEntity.setCantidad(0);
+    inventarioRepository.save(inventarioEntity);
+
+    log.info("Creación de producto fin");
+
+    return productoMapper.toDto(productoPersistido);
   }
 
   /**
