@@ -1,4 +1,4 @@
-# Despliegue
+# 1. Despliegue
 
 En una carpeta vacía ubicar el archivo docker-compose.yml y en esa misma carpeta descargar los microservicios del repositorio:
 
@@ -35,9 +35,21 @@ Conectarse a la DB de MySQL con las siguientes credenciales (password: pass):
  
 Y ejecutar los scripts del archivo linktic_scripts-mysql.sql para crear las tablas.
 
-
 ### Acceso a Swagger:
 
 - http://localhost:8086/swagger-ui/index.html (producto)
 - http://localhost:8087/swagger-ui/index.html (inventario)
 - http://localhost:8088/swagger-ui/index.html (compra)
+
+
+# 2. Arquitectura:
+
+![imagen](./imagenes/Imagen_arq.png)
+
+
+# 3. Descripción:
+
+Se creó un tercer microservicio (PruebaCompraLinkTIC) para el flujo de compra ya que los otros dos (producto e inventario) ya tenían las funcionalidades necesarias de consulta de producto, actualización de inventario y consulta de inventario.
+
+El tercer microservicio cuenta con 2 Feign Client para hacer peticiones a los otros 2 contenedores.
+
