@@ -17,6 +17,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -41,6 +42,7 @@ public class ProductoService implements IProductoService {
    * @throws ErrorGeneralException excepción si ocurre un error
    */
   @Override
+  @Transactional
   public ProductoDtoOut crearProducto(ProductoDtoIn productoDtoIn) throws ErrorGeneralException {
     log.info("Creación de producto inicio");
     validarDatosEntrada(productoDtoIn);
