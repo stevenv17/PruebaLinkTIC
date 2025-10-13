@@ -6,7 +6,8 @@ En una carpeta vacía ubicar el archivo docker-compose.yml y en esa misma carpet
 - **https://github.com/stevenv17/PruebaInventarioLinkTIC.git** (microservicio inventario)
 - **https://github.com/stevenv17/PruebaCompraLinkTIC.git** (microservicio compra)
 
- 
+ ![Texto alternativo](./imagenes/imagen1.png)
+
 
 Ubicarse en la raíz de cada uno de los microservicios y crear el archivo jar con el comando “**./mvnw clean package -DskipTest**” (Instalar Maven para este paso):
 
