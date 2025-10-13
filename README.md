@@ -1,6 +1,6 @@
 # 1. Despliegue
 
-En una carpeta vacía ubicar el archivo docker-compose.yml y en esa misma carpeta descargar los microservicios del repositorio:
+En una carpeta vacía ubicar el archivo docker-compose.yml (esta en la raiz de este proyecto) y en esa misma carpeta descargar los microservicios del repositorio:
 
 - **https://github.com/stevenv17/PruebaLinkTIC.git** (microservicio productos)
 - **https://github.com/stevenv17/PruebaInventarioLinkTIC.git** (microservicio inventario)
@@ -53,3 +53,10 @@ Se creó un tercer microservicio (PruebaCompraLinkTIC) para el flujo de compra y
 
 El tercer microservicio cuenta con 2 Feign Client para hacer peticiones a los otros 2 contenedores.
 
+Los microservicios de inventario y producto requieren autenticación con API_KEY a traves del header x-api-key:
+
+![imagen](./imagenes/Imagen8.png)
+
+En caso de que no sea correcto o no sé coloque el header, se obtendra una respuesta con status 401:
+
+![imagen](./imagenes/Imagen9.png)
