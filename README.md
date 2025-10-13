@@ -1,4 +1,4 @@
-Despliegue
+#Despliegue
 
 En una carpeta vacía ubicar el archivo docker-compose.yml y en esa misma carpeta descargar los microservicios del repositorio:
 
@@ -20,10 +20,10 @@ Después desde la ruta donde está ubicado el archivo docker-compose.yml ejecuta
 
 También se puede subir uno por uno los servicios (orden recomendado):
 
-docker-compose up mysql -d
-docker-compose up productos-service -d
-docker-compose up inventario-service -d
-docker-compose up compra-service -d
+- **docker-compose up mysql -d**
+- **docker-compose up productos-service -d**
+- **docker-compose up inventario-service -d**
+- **docker-compose up compra-service -d**
 
  
 
