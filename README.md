@@ -64,3 +64,15 @@ En caso de que no sea correcto o no sé coloque el header, se obtendra una respu
 # 4. Colección peticiones:
 
 Hay una colección con las peticiones en este microservicio en la raiz que puede ser importada en Postman: Insomnia_collection_linktic.json
+
+# 5. Flujo de compra:
+
+Se realiza la petición de compra http://localhost:8088/compra/comprar-producto se realizan validaciones de existencia de producto e inventario a través de comunicación interna (CON API KEY entre los microservicios).
+Después también con petición interna entre microservicios se actualiza inventario y se devuelve respuesta con valor total, descripción del producto.
+
+![imagen](./imagenes/Imagen10.png)
+
+# 6. Uso de IA:
+
+Se utilizo IA para consultar información necesaria para desarrollar la funcionalidad, tal como la implementación de un API KEY para autenticación entre microservicios.
+También para consultar librerias o imagenes de Docker. 
