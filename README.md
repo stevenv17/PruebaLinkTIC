@@ -60,3 +60,7 @@ Los microservicios de inventario y producto requieren autenticación con API_KEY
 En caso de que no sea correcto o no sé coloque el header, se obtendra una respuesta con status 401:
 
 ![imagen](./imagenes/Imagen9.png)
+
+# 4. Colección peticiones:
+
+Hay una colección con las peticiones en este microservicio en la raiz que puede ser importada en Postman: Insomnia_collection_linktic.json

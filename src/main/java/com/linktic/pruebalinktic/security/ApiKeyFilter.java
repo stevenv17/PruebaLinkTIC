@@ -25,6 +25,16 @@ public class ApiKeyFilter extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request,
                                   HttpServletResponse response,
                                   FilterChain filterChain) throws ServletException, IOException {
+
+
+    String path = request.getRequestURI();
+    // Excluir Swagger antes de validar la API Key
+    if (path.startsWith("/swagger-ui") || path.startsWith("/v3/api-docs")
+        || path.startsWith("/swagger-resources") || path.startsWith("/webjars")) {
+      filterChain.doFilter(request, response);
+      return;
+    }
+
     String apiKey = request.getHeader("x-api-key");
 
     if (validApiKey.equals(apiKey)) {
