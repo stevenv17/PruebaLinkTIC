@@ -5,6 +5,9 @@ import com.linktic.pruebalinktic.dto.ProductoDtoOut;
 import com.linktic.pruebalinktic.exception.ElementoNoEncontradoException;
 import com.linktic.pruebalinktic.exception.ErrorGeneralException;
 import com.linktic.pruebalinktic.service.IProductoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -32,6 +35,12 @@ public class ProductoController {
      * @return Objeto que representa el producto creado
      * @throws ErrorGeneralException excepción si ocurre un error
      */
+    @Operation(summary = "Crear producto", description = "Crea producto")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Producto creado"),
+        @ApiResponse(responseCode = "500", description = "Error creando producto"),
+        @ApiResponse(responseCode = "401", description = "Acceso no autorizado")
+    })
     @PostMapping(value = "/crear", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductoDtoOut> crearProducto(@RequestBody ProductoDtoIn producto) throws ErrorGeneralException {
         return ResponseEntity.ok(iProductoService.crearProducto(producto));

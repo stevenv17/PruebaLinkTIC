@@ -17,6 +17,9 @@ spring:
 server:
   port: 8086
 
+apikey:
+  valor: ${MICROSERVICIO_APIKEY:PRODUCTO_CLAVE_SECRETA_123}
+
 logging:
   level:
     root: INFO
