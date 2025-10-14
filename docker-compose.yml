@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: linkticdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - microservicios-net
+
+  productos-service:
+    build:
+      context: ./PruebaLinkTIC
+    container_name: productos-service
+    ports:
+      - "8086:8086"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/linkticdb?allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=pass
+      - MICROSERVICIO_APIKEY=PRODUCTO_CLAVE_SECRETA_123_DOCKER
+    networks:
+      - microservicios-net
+
+  inventario-service:
+    build:
+      context: ./PruebaInventarioLinkTIC
+    container_name: inventario-service
+    ports:
+      - "8087:8087"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/linkticdb?allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=pass
+      - MICROSERVICIO_PRODUCTO=http://productos-service:8086/producto
+      - MICROSERVICIO_APIKEY=INVENTARIO_CLAVE_SECRETA_123_DOCKER
+      - MICROSERVICIO_PRODUCTO_APIKEY=PRODUCTO_CLAVE_SECRETA_123_DOCKER
+    networks:
+      - microservicios-net
+
+  compra-service:
+    build:
+      context: ./PruebaCompraLinkTIC
+    container_name: compra-service
+    ports:
+      - "8088:8088"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/linkticdb?allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=pass
+      - MICROSERVICIO_PRODUCTO=http://productos-service:8086/producto
+      - MICROSERVICIO_INVENTARIO=http://inventario-service:8087/inventario
+      - MICROSERVICIO_PRODUCTO_APIKEY=PRODUCTO_CLAVE_SECRETA_123_DOCKER
+      - MICROSERVICIO_INVENTARIO_APIKEY=INVENTARIO_CLAVE_SECRETA_123_DOCKER
+    networks:
+      - microservicios-net
+
+volumes:
+  mysql-data:
+
+networks:
+  microservicios-net:
+    driver: bridge
+
