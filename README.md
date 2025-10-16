@@ -9,7 +9,7 @@ En una carpeta vacía ubicar el archivo docker-compose.yml (esta en la raiz de e
  ![imagen](./imagenes/Imagen1.png)
 
 
-Ubicarse en la raíz de cada uno de los microservicios y crear el archivo jar con el comando “**./mvnw clean package -DskipTest**” (Instalar Maven para este paso):
+Ubicarse en la raíz de cada uno de los microservicios y crear el archivo jar con el comando “**./mvnw clean package -DskipTest**”:
 
 ![imagen](./imagenes/Imagen2.png)
 
@@ -40,6 +40,14 @@ Y ejecutar los scripts del archivo linktic_scripts-mysql.sql para crear las tabl
 - http://localhost:8086/swagger-ui/index.html (producto)
 - http://localhost:8087/swagger-ui/index.html (inventario)
 - http://localhost:8088/swagger-ui/index.html (compra)
+
+### pruebas unitarias:
+
+Utilizar el comando “**./mvnw verify**” para correr pruebas unitarias y validar que cumplan con la cobertura configurada en el pom.xml:
+
+![imagen](./imagenes/Imagen11.png)
+
+![imagen](./imagenes/Imagen12.png)
 
 
 # 2. Arquitectura:
